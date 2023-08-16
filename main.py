@@ -230,7 +230,7 @@ def generate_calendar(
         month = dt.datetime.now().month
 
     start_date = dt.datetime(year, month, 1, tzinfo=ZoneInfo("Europe/Zurich"))
-    next_year, next_month = year, month + 1 if month < 12 else year + 1, 1
+    next_year, next_month = (year, month + 1) if month < 12 else (year + 1, 1)
     end_date = dt.datetime(next_year, next_month, 1, tzinfo=ZoneInfo("Europe/Zurich"))
 
     relevant_events = get_relevant_events(names, start_date, end_date)
