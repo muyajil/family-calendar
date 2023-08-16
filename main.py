@@ -249,6 +249,7 @@ def replace_with_emojis(html):
     html = html.replace("Bibliothek", "📚")
     html = html.replace("Fussball", "⚽")
     html = html.replace("Pilates", "🏋️‍♂️")
+    html = html.replace("Spielgruppe", "🛝")
     return html
 
 
