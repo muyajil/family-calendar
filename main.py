@@ -229,6 +229,7 @@ def replace_with_emojis(html):
     html.replace("Dinner", "🍽️")
     html.replace("Mittagessen", "🍽️")
     html.replace("Mittag", "🍽️")
+    html.replace("Lunch", "🍽️")
     html.replace("Abendessen", "🍽️")
     html.replace("Camping", "🏕️")
     html.replace("KG", "🎓")
@@ -238,8 +239,12 @@ def replace_with_emojis(html):
     html.replace("Arzt", "👨‍⚕️")
     html.replace("Yoga", "🧘")
     html.replace("Sport", "🏃")
+    html.replace("Turnen", "🏃")
+    html.replace("Wald", "🌳")
     html.replace("Fussball", "⚽")
     html.replace("Pilates", "🧘")
+    return html
+
 
 @app.get("/")
 def generate_calendar(
@@ -263,6 +268,7 @@ def generate_calendar(
     relevant_events = remove_empty_calendars(relevant_events)
     table = populate_table(relevant_events, start_date, end_date, year, month)
     table = stringify_table_content(table)
+    table = replace_with_emojis(table)
     result = write_table(table, f"calendar_{year}_{month}", format=format)
     print(f"Generated calendar for {year}/{month}")
     if format == "pdf":
