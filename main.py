@@ -90,7 +90,7 @@ def get_html_table(table):
     return html
 
 
-def write_table(table, filename, format: Literal["pdf", "html"]):
+def write_table(html, filename, format: Literal["pdf", "html"]):
     if format == "pdf":
         HTML(string=html).write_pdf(f"{filename}.pdf")
         return f"{filename}.pdf"
