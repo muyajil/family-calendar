@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "TZ": "Europe/Zurich",
+                "NAMES": "TEST1,🙋🏼‍♀️ TEST2",
+                "TEST1": "https://gist.githubusercontent.com/DeMarko/6142417/raw/1cd301a5917141524b712f92c2e955e86a1add19/sample.ics",
+                "🙋🏼‍♀️ TEST2": "https://gist.githubusercontent.com/DeMarko/6142417/raw/1cd301a5917141524b712f92c2e955e86a1add19/sample.ics",
+                "COLOR_TEST1": "#af7dff",
+                "COLOR_🙋🏼‍♀️ TEST2": "#f4be40",
+            }
+        }
+    ]
+}

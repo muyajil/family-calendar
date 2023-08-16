@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  family-calendar:
+    image: muyajil/family-calendar:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      TZ: Europe/Zurich
+      NAMES: "TEST1,🙋🏼‍♀️ TEST2"
+      TEST1: "https://gist.githubusercontent.com/DeMarko/6142417/raw/1cd301a5917141524b712f92c2e955e86a1add19/sample.ics"
+      🙋🏼‍♀️ TEST2: "https://gist.githubusercontent.com/DeMarko/6142417/raw/1cd301a5917141524b712f92c2e955e86a1add19/sample.ics"
+      COLOR_TEST1: "#af7dff"
+      COLOR_🙋🏼‍♀️ TEST2: "#f4be40"
