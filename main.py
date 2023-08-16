@@ -234,7 +234,7 @@ def replace_with_emojis(html):
     html = html.replace("Lunch", "🍽️")
     html = html.replace("Abendessen", "🌛🍽️")
     html = html.replace("Camping", "🏕️")
-    html = html.replace("KG", "🎓")
+    html = html.replace("KG ", "🎓")
     html = html.replace("Coiffeur", "💇")
     html = html.replace("Hochzeit", "💒")
     html = html.replace("Zahnarzt", "🦷")
