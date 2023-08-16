@@ -25,27 +25,6 @@ WEEKDAYS = {
     6: "SU",
 }
 
-
-# CALENDARS = {
-#     "🧔🏾‍♂️ Papi": "https://calendar.google.com/calendar/ical/mohammed%40ajil.ch/private-84c41a849708e86f2bbec955313cd040/basic.ics",
-#     "🙋🏼‍♀️ Mami": "https://calendar.google.com/calendar/ical/larissa%40ajil.ch/private-b0079af6089fb2c216e36a6725445b97/basic.ics",
-#     "👧🏽 Liana": "https://calendar.google.com/calendar/ical/liana%40ajil.ch/private-25cc80f17abf95e2642a2a4fc8cd4d85/basic.ics",
-#     "👦🏽 Louai": "https://calendar.google.com/calendar/ical/louai%40ajil.ch/private-0f37554ab3acea9d1a88e8dc29896298/basic.ics",
-#     "👶🏽 Mounir": "https://calendar.google.com/calendar/ical/mounir%40ajil.ch/private-373c517aa5e11fd77fd6439c047941c7/basic.ics",
-#     "🎂 Birthdays": "https://calendar.google.com/calendar/ical/c_39cc4940487b0ba5997916afe101d20b52948233ba4087eedc36e2ecc0b77fc7%40group.calendar.google.com/private-8533f7d9a2338266c019cfaf05469923/basic.ics",
-#     "🌴 Schulferien": "https://calendar.google.com/calendar/ical/4r9ae1aug8db4ischbec7fodsu6ch644%40import.calendar.google.com/public/basic.ics",
-# }
-
-# COLORS = {
-#     "🧔🏾‍♂️ Papi": "#af7dff",
-#     "🙋🏼‍♀️ Mami": "#f4be40",
-#     "👧🏽 Liana": "#D81B60",
-#     "👦🏽 Louai": "#4285F4",
-#     "👶🏽 Mounir": "#0B8043",
-#     "🎂 Birthdays": "#bfcaff",
-#     "🌴 Schulferien": "#D50000",
-# }
-
 MAX_EVENTS_PER_CELL = 0
 
 
@@ -251,7 +230,8 @@ def generate_calendar(
         month = dt.datetime.now().month
 
     start_date = dt.datetime(year, month, 1, tzinfo=ZoneInfo("Europe/Zurich"))
-    end_date = dt.datetime(year, month + 1, 1, tzinfo=ZoneInfo("Europe/Zurich"))
+    next_year, next_month = year, month + 1 if month < 12 else year + 1, 1
+    end_date = dt.datetime(next_year, next_month, 1, tzinfo=ZoneInfo("Europe/Zurich"))
 
     relevant_events = get_relevant_events(names, start_date, end_date)
 
