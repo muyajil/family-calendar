@@ -261,7 +261,7 @@ def generate_calendar(
     year: Optional[int] = None,
     month: Optional[int] = None,
     format: Literal["pdf", "html"] = os.environ.get("DEFAULT_FORMAT", "pdf"),
-    emoji: bool = os.environ.get("EMOJI", "false"),
+    emoji: bool = False,
 ):
     names = os.environ["NAMES"].split(",")
     global MAX_EVENTS_PER_CELL
