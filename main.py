@@ -261,6 +261,7 @@ def generate_calendar(
     year: Optional[int] = None,
     month: Optional[int] = None,
     format: Literal["pdf", "html"] = os.environ.get("DEFAULT_FORMAT", "pdf"),
+    emoji: bool = os.environ.get("EMOJI", "false"),
 ):
     names = os.environ["NAMES"].split(",")
     global MAX_EVENTS_PER_CELL
@@ -279,7 +280,8 @@ def generate_calendar(
     table = populate_table(relevant_events, start_date, end_date, year, month)
     table = stringify_table_content(table)
     html = get_html_table(table)
-    html = replace_with_emojis(html)
+    if emoji:
+        html = replace_with_emojis(html)
     result = write_table(html, f"calendar_{year}_{month}", format=format)
     print(f"Generated calendar for {year}/{month}")
     if format == "pdf":
