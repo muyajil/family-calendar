@@ -216,6 +216,31 @@ def stringify_table_content(table):
     return table
 
 
+def replace_with_emojis(html):
+    html.replace("Badi", "🏊")
+    html.replace("Ferien", "🏖️")
+    html.replace("Geburtstag", "🎂")
+    html.replace("Geburt", "👶")
+    html.replace("Znacht", "🍽️")
+    html.replace("Zmittag", "🍽️")
+    html.replace("Zmorge", "🍽️")
+    html.replace("Znüni", "🍽️")
+    html.replace("Zvieri", "🍽️")
+    html.replace("Dinner", "🍽️")
+    html.replace("Mittagessen", "🍽️")
+    html.replace("Mittag", "🍽️")
+    html.replace("Abendessen", "🍽️")
+    html.replace("Camping", "🏕️")
+    html.replace("KG", "🎓")
+    html.replace("Coiffeur", "💇")
+    html.replace("Hochzeit", "💒")
+    html.replace("Zahnarzt", "🦷")
+    html.replace("Arzt", "👨‍⚕️")
+    html.replace("Yoga", "🧘")
+    html.replace("Sport", "🏃")
+    html.replace("Fussball", "⚽")
+    html.replace("Pilates", "🧘")
+
 @app.get("/")
 def generate_calendar(
     year: Optional[int] = None,
