@@ -91,7 +91,6 @@ def get_html_table(table):
 
 
 def write_table(table, filename, format: Literal["pdf", "html"]):
-    html = get_html_table(table)
     if format == "pdf":
         HTML(string=html).write_pdf(f"{filename}.pdf")
         return f"{filename}.pdf"
@@ -268,8 +267,9 @@ def generate_calendar(
     relevant_events = remove_empty_calendars(relevant_events)
     table = populate_table(relevant_events, start_date, end_date, year, month)
     table = stringify_table_content(table)
-    table = replace_with_emojis(table)
-    result = write_table(table, f"calendar_{year}_{month}", format=format)
+    html = get_html_table(table)
+    html = replace_with_emojis(html)
+    result = write_table(html, f"calendar_{year}_{month}", format=format)
     print(f"Generated calendar for {year}/{month}")
     if format == "pdf":
         return FileResponse(result)
