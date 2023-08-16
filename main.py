@@ -13,6 +13,7 @@ import os
 app = FastAPI()
 
 # Apply Timezone from env TZ
+timezone = os.environ.get("TZ", "Europe/Zurich")
 time.tzset()
 
 WEEKDAYS = {
@@ -105,8 +106,8 @@ def get_event_dates(component):
         ev_start = dt.datetime.combine(ev_start, dt.time(0, 0, 0))
     if not isinstance(ev_end, dt.datetime):
         ev_end = dt.datetime.combine(ev_end, dt.time(0, 0, 0))
-    ev_start = ev_start.astimezone(ZoneInfo("Europe/Zurich"))
-    ev_end = ev_end.astimezone(ZoneInfo("Europe/Zurich"))
+    ev_start = ev_start.astimezone(ZoneInfo(timezone))
+    ev_end = ev_end.astimezone(ZoneInfo(timezone))
     return ev_start, ev_end
 
 
@@ -176,7 +177,7 @@ def populate_table(relevant_events, start_date, end_date, year, month):
             if start.month != month:
                 # Since we want to start at the beginning of the month, we need to remove the days before
                 new_start = dt.datetime(
-                    year, month, 1, tzinfo=ZoneInfo("Europe/Zurich")
+                    year, month, 1, tzinfo=ZoneInfo(timezone)
                 )
                 too_many_days = (new_start - start).days
                 start = new_start
@@ -218,16 +219,17 @@ def stringify_table_content(table):
 def replace_with_emojis(html):
     html = html.replace("Badi", "🏊")
     html = html.replace("Ferien", "🏖️")
-    html = html.replace("Geburtstags", "🎂")
+    html = html.replace("Monatsz9", "⭐️")
+    html = html.replace("Monatsznüni", "⭐️")
+    html = html.replace("Geburtstagsz9", "🎂")
+    html = html.replace("Geburtstagsznüni", "🎂")
     html = html.replace("Geburtstag", "🎂")
     html = html.replace("Geburt", "👶")
     html = html.replace("Znacht", "🌛🍽️")
     html = html.replace("Zmittag", "🍽️")
     html = html.replace("Zmorge", "🍳")
     html = html.replace("Znüni", "🍎")
-    html = html.replace("z9", "🍎")
     html = html.replace("znüni", "🍎")
-    html = html.replace("Monats", "⭐️")
     html = html.replace("Zvieri", "🍎")
     html = html.replace("Dinner", "🌛🍽️")
     html = html.replace("Mittagessen", "🍽️")
@@ -235,7 +237,7 @@ def replace_with_emojis(html):
     html = html.replace("Lunch", "🍽️")
     html = html.replace("Abendessen", "🌛🍽️")
     html = html.replace("Camping", "🏕️")
-    html = html.replace("KG ", "🎓")
+    html = html.replace("KG ", "🎓 > ")
     html = html.replace("Coiffeur", "💇")
     html = html.replace("Hochzeit", "💒")
     html = html.replace("Zahnarzt", "🦷")
@@ -267,9 +269,9 @@ def generate_calendar(
     if month is None:
         month = dt.datetime.now().month
 
-    start_date = dt.datetime(year, month, 1, tzinfo=ZoneInfo("Europe/Zurich"))
+    start_date = dt.datetime(year, month, 1, tzinfo=ZoneInfo(timezone))
     next_year, next_month = (year, month + 1) if month < 12 else (year + 1, 1)
-    end_date = dt.datetime(next_year, next_month, 1, tzinfo=ZoneInfo("Europe/Zurich"))
+    end_date = dt.datetime(next_year, next_month, 1, tzinfo=ZoneInfo(timezone))
 
     relevant_events = get_relevant_events(names, start_date, end_date)
 
