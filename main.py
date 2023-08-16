@@ -226,6 +226,7 @@ def replace_with_emojis(html):
     html = html.replace("Zmorge", "🍳")
     html = html.replace("Znüni", "🍎")
     html = html.replace("z9", "🍎")
+    html = html.replace("znüni", "🍎")
     html = html.replace("Monats", "⭐️")
     html = html.replace("Zvieri", "🍎")
     html = html.replace("Dinner", "🌛🍽️")
