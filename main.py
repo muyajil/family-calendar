@@ -170,7 +170,7 @@ def populate_table(relevant_events, start_date, end_date, year, month):
             num_days = (end - start).days + 1
             if end.hour == 0 and end.minute == 0:
                 # If an event ends at midnight on day one, no need to add it this month
-                if end.day == 1:
+                if end.day == 1 and end.month == month:
                     continue
                 # If an event ends at midnight in general, it ends at the end of the previous day
                 num_days -= 1
