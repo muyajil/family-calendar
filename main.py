@@ -143,6 +143,12 @@ def get_relevant_events(names, start_date, end_date):
                     ev_start, ev_end = get_event_dates(component)
                 except Exception:
                     continue
+                try:
+                    if component.get("rrule")["FREQ"][0] == "YEARLY":
+                        ev_start = ev_start.replace(year=start_date.year)
+                        ev_end = ev_end.replace(year=start_date.year)
+                except Exception:
+                    pass
                 if (start_date <= ev_start < end_date) or (
                     start_date < ev_end <= end_date
                 ):
