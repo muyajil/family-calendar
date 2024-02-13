@@ -144,6 +144,12 @@ def get_relevant_events(names, start_date, end_date):
                     continue
                 event_tuples = []
                 try:
+                    if "UNTIL" in component.get("rrule"):
+                        until = component.get("rrule")["UNTIL"][0]
+                        if until < start_date:
+                            continue
+                    else:
+                        until = None
                     if component.get("rrule")["FREQ"][0] == "YEARLY":
                         ev_start = ev_start.replace(year=start_date.year)
                         ev_end = ev_end.replace(year=start_date.year)
@@ -153,7 +159,6 @@ def get_relevant_events(names, start_date, end_date):
                         ev_end = ev_end.replace(year=start_date.year, month=start_date.month)
                         event_tuples.append((ev_start, ev_end, str(component.get("summary"))))
                     if component.get("rrule")["FREQ"][0] == "WEEKLY":
-                        until = component.get("rrule")["UNTIL"]
                         while ev_end < start_date:
                             ev_start += dt.timedelta(days=7)
                             ev_end += dt.timedelta(days=7)
