@@ -144,39 +144,58 @@ def get_relevant_events(names, start_date, end_date):
                     continue
                 event_tuples = []
                 try:
-                    if "UNTIL" in component.get("rrule"):
-                        until = component.get("rrule")["UNTIL"][0]
+                    rrule = component.get("rrule")
+                    if rrule and "UNTIL" in rrule:
+                        until = rrule["UNTIL"][0]
+                        if isinstance(until, dt.date):
+                            until = dt.datetime.combine(until, dt.time(0, 0, 0))
+                            until = until.astimezone(ZoneInfo(timezone))
                         if until < start_date:
                             continue
                     else:
                         until = None
-                    if component.get("rrule")["FREQ"][0] == "YEARLY":
-                        ev_start = ev_start.replace(year=start_date.year)
-                        ev_end = ev_end.replace(year=start_date.year)
-                        event_tuples.append((ev_start, ev_end, str(component.get("summary"))))
-                    if component.get("rrule")["FREQ"][0] == "MONTHLY":
-                        ev_start = ev_start.replace(year=start_date.year, month=start_date.month)
-                        ev_end = ev_end.replace(year=start_date.year, month=start_date.month)
-                        event_tuples.append((ev_start, ev_end, str(component.get("summary"))))
-                    if component.get("rrule")["FREQ"][0] == "WEEKLY":
-                        while ev_end < start_date:
-                            ev_start += dt.timedelta(days=7)
-                            ev_end += dt.timedelta(days=7)
-                        while ev_start < end_date:
-                            if until and ev_start > until:
-                                break
-                            event_tuples.append((ev_start, ev_end, str(component.get("summary"))))
-                            ev_start += dt.timedelta(days=7)
-                            ev_end += dt.timedelta(days=7)
-                except Exception:
-                    pass
+                    summary = str(component.get("summary"))
+                    if rrule:
+                        if rrule["FREQ"][0] == "YEARLY":
+                            ev_start = ev_start.replace(year=start_date.year)
+                            ev_end = ev_end.replace(year=start_date.year)
+                            event_tuples.append((ev_start, ev_end, summary))
+                        if rrule["FREQ"][0] == "MONTHLY":
+                            ev_start = ev_start.replace(year=start_date.year, month=start_date.month)
+                            ev_end = ev_end.replace(year=start_date.year, month=start_date.month)
+                            event_tuples.append((ev_start, ev_end, summary))
+                        elif rrule["FREQ"][0] == "WEEKLY":
+                            if count := rrule.get("COUNT"):
+                                count = count[0]
+                            else:
+                                count = 0
+                            while ev_end < start_date:
+                                ev_start += dt.timedelta(days=7)
+                                ev_end += dt.timedelta(days=7)
+                                count -= 1
+                                if count == 0:
+                                    break
+                            while ev_start < end_date:
+                                if count == 0:
+                                    break
+                                if until and ev_start > until:
+                                    break
+                                event_tuples.append((ev_start, ev_end, summary))
+                                ev_start += dt.timedelta(days=7)
+                                ev_end += dt.timedelta(days=7)
+                                count -= 1
+                    else:
+                        event_tuples.append((ev_start, ev_end, summary))
+                except Exception as e:
+                    print(f"Error with {name}")
+                    print(e)
+                    exit()
                 for ev_start, ev_end, summary in event_tuples:
                     if (start_date <= ev_start < end_date) or (
                         start_date < ev_end <= end_date
                     ):
                         relevant_events[name].append(
-                            (ev_start, ev_end, str(component.get("summary")))
-                        )
+                            (ev_start, ev_end, summary))
     return relevant_events
 
 

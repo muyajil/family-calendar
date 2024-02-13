@@ -1,7 +1,7 @@
 {
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid":"830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -13,11 +13,21 @@
             "justMyCode": true,
             "env": {
                 "TZ": "Europe/Zurich",
-                "NAMES": "TEST1,🙋🏼‍♀️ TEST2",
-                "TEST1": "https://gist.githubusercontent.com/DeMarko/6142417/raw/1cd301a5917141524b712f92c2e955e86a1add19/sample.ics",
-                "🙋🏼‍♀️ TEST2": "https://gist.githubusercontent.com/DeMarko/6142417/raw/1cd301a5917141524b712f92c2e955e86a1add19/sample.ics",
-                "COLOR_TEST1": "#af7dff",
-                "COLOR_🙋🏼‍♀️ TEST2": "#f4be40",
+                "NAMES": "PAPI,MAMI,LIANA,LOUAI,MOUNIR,BDAY,VACA",
+                "PAPI":"https://calendar.google.com/calendar/ical/mohammed%40ajil.ch/private-84c41a849708e86f2bbec955313cd040/basic.ics",
+                "MAMI":"https://calendar.google.com/calendar/ical/larissa%40ajil.ch/private-b0079af6089fb2c216e36a6725445b97/basic.ics",
+                "LIANA":"https://calendar.google.com/calendar/ical/liana%40ajil.ch/private-25cc80f17abf95e2642a2a4fc8cd4d85/basic.ics",
+                "LOUAI":"https://calendar.google.com/calendar/ical/louai%40ajil.ch/private-0f37554ab3acea9d1a88e8dc29896298/basic.ics",
+                "MOUNIR":"https://calendar.google.com/calendar/ical/mounir%40ajil.ch/private-373c517aa5e11fd77fd6439c047941c7/basic.ics",
+                "BDAY":"https://calendar.google.com/calendar/ical/c_39cc4940487b0ba5997916afe101d20b52948233ba4087eedc36e2ecc0b77fc7%40group.calendar.google.com/private-8533f7d9a2338266c019cfaf05469923/basic.ics",
+                "VACA":"https://calendar.google.com/calendar/ical/4r9ae1aug8db4ischbec7fodsu6ch644%40import.calendar.google.com/public/basic.ics",
+                "COLOR_PAPI": "#af7dff",
+                "COLOR_MAMI": "#af7dff",
+                "COLOR_LIANA": "#af7dff",
+                "COLOR_LOUAI": "#af7dff",
+                "COLOR_MOUNIR": "#af7dff",
+                "COLOR_BDAY": "#af7dff",
+                "COLOR_VACA": "#af7dff",
             }
         }
     ]
