@@ -130,7 +130,6 @@ def initialize_table(candidates, num_days, year, month):
     )
     return table
 
-
 def get_relevant_events(names, start_date, end_date):
     relevant_events = dict([(k, []) for k in names])
     for name in names:
@@ -143,21 +142,33 @@ def get_relevant_events(names, start_date, end_date):
                     ev_start, ev_end = get_event_dates(component)
                 except Exception:
                     continue
+                event_tuples = []
                 try:
                     if component.get("rrule")["FREQ"][0] == "YEARLY":
                         ev_start = ev_start.replace(year=start_date.year)
                         ev_end = ev_end.replace(year=start_date.year)
+                        event_tuples.append((ev_start, ev_end, str(component.get("summary"))))
                     if component.get("rrule")["FREQ"][0] == "MONTHLY":
                         ev_start = ev_start.replace(year=start_date.year, month=start_date.month)
                         ev_end = ev_end.replace(year=start_date.year, month=start_date.month)
+                        event_tuples.append((ev_start, ev_end, str(component.get("summary"))))
+                    if component.get("rrule")["FREQ"][0] == "WEEKLY":
+                        while ev_end < start_date:
+                            ev_start += dt.timedelta(days=7)
+                            ev_end += dt.timedelta(days=7)
+                        while ev_start < end_date:
+                            event_tuples.append((ev_start, ev_end, str(component.get("summary"))))
+                            ev_start += dt.timedelta(days=7)
+                            ev_end += dt.timedelta(days=7)
                 except Exception:
                     pass
-                if (start_date <= ev_start < end_date) or (
-                    start_date < ev_end <= end_date
-                ):
-                    relevant_events[name].append(
-                        (ev_start, ev_end, str(component.get("summary")))
-                    )
+                for ev_start, ev_end, summary in event_tuples:
+                    if (start_date <= ev_start < end_date) or (
+                        start_date < ev_end <= end_date
+                    ):
+                        relevant_events[name].append(
+                            (ev_start, ev_end, str(component.get("summary")))
+                        )
     return relevant_events
 
 
