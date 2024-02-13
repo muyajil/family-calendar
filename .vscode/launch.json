@@ -14,7 +14,7 @@
             "env": {
                 "TZ": "Europe/Zurich",
                 "NAMES": "TEST1,🙋🏼‍♀️ TEST2",
-                "TEST1": "https://calendar.google.com/calendar/ical/louai%40ajil.ch/private-0f37554ab3acea9d1a88e8dc29896298/basic.ics",
+                "TEST1": "https://gist.githubusercontent.com/DeMarko/6142417/raw/1cd301a5917141524b712f92c2e955e86a1add19/sample.ics",
                 "🙋🏼‍♀️ TEST2": "https://gist.githubusercontent.com/DeMarko/6142417/raw/1cd301a5917141524b712f92c2e955e86a1add19/sample.ics",
                 "COLOR_TEST1": "#af7dff",
                 "COLOR_🙋🏼‍♀️ TEST2": "#f4be40",
